@@ -81,14 +81,18 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  min-height: 100dvh;
+  overflow: hidden;
+  height: 100%;
+  height: 100dvh;
+  width: 100%;
 }
 
 #root {
-  min-height: 100dvh;
+  height: 100%;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 img {
@@ -137,12 +141,15 @@ input, textarea, select {
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  height: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
   max-width: 480px;
   margin: 0 auto;
   width: 100%;
   background-color: var(--color-bg);
   position: relative;
+  overflow: hidden;
 }
 
 /* ===== Header ===== */
@@ -157,6 +164,7 @@ input, textarea, select {
   position: sticky;
   top: 0;
   z-index: 100;
+  flex-shrink: 0;
 }
 
 .header__left {
@@ -224,6 +232,7 @@ input, textarea, select {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border-light);
   padding: 0 var(--spacing-md);
+  flex-shrink: 0;
 }
 
 .tabs__item {
@@ -264,21 +273,25 @@ input, textarea, select {
 /* ===== Main Content ===== */
 .main-content {
   flex: 1;
-  padding: var(--spacing-xs);
-  padding-top: var(--spacing-md);
-  padding-bottom: calc(var(--bottom-nav-height) + var(--spacing-md) + var(--safe-area-bottom));
+  min-height: 0;
+  padding: 8px 12px;
+  padding-bottom: calc(var(--bottom-nav-height) + var(--safe-area-bottom) + 8px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  gap: 4px;
 }
 
 /* ===== Document Card ===== */
 .document-card {
+  flex: 1;
+  min-height: 0;
   width: 100%;
-  aspect-ratio: 1 / 1.52;
+  height: 100%;
   background-color: transparent;
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
   overflow: hidden;
   animation: fadeInUp 0.4s ease-out;
   display: flex;
@@ -287,9 +300,13 @@ input, textarea, select {
 }
 
 .document-card__image {
-  width: 96%;
-  height: 96%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
   display: block;
   user-select: none;
   -webkit-user-drag: none;
@@ -496,17 +513,19 @@ input, textarea, select {
 
 /* QR Code Styles */
 .qr-code-container {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-xl);
-  gap: var(--spacing-lg);
+  padding: var(--spacing-sm);
+  gap: var(--spacing-md);
 }
 
 .qr-code-box {
-  width: 220px;
-  height: 220px;
+  width: min(220px, 50vw);
+  height: min(220px, 50vw);
   background-color: var(--color-surface);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
@@ -517,8 +536,8 @@ input, textarea, select {
 }
 
 .qr-code-grid {
-  width: 180px;
-  height: 180px;
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(21, 1fr);
   grid-template-rows: repeat(21, 1fr);
@@ -541,11 +560,13 @@ input, textarea, select {
 
 /* ===== Update Info ===== */
 .update-info {
-  margin-top: var(--spacing-lg);
-  font-size: var(--font-size-sm);
+  margin-top: 2px;
+  font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   text-align: center;
   font-style: italic;
+  flex-shrink: 0;
+  line-height: 1.2;
 }
 
 /* ===== Bottom Navigation ===== */
@@ -656,8 +677,12 @@ input, textarea, select {
 
 /* ===== Services Page ===== */
 .services-page {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: var(--spacing-lg);
-  padding-bottom: calc(var(--bottom-nav-height) + var(--spacing-lg));
+  padding-bottom: calc(var(--bottom-nav-height) + var(--spacing-lg) + var(--safe-area-bottom));
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -738,8 +763,12 @@ input, textarea, select {
 
 /* ===== Options Page ===== */
 .options-page {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: var(--spacing-lg);
-  padding-bottom: calc(var(--bottom-nav-height) + var(--spacing-lg));
+  padding-bottom: calc(var(--bottom-nav-height) + var(--spacing-lg) + var(--safe-area-bottom));
   animation: fadeIn 0.3s ease-out;
 }
 
